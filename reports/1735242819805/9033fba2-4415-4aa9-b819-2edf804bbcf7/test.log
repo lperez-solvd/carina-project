@@ -1,0 +1,6 @@
+[2024-12-26 07:53:41] [1] [WARN] Reporting disabled: using no op test run registrar
+[2024-12-26 07:53:41] [1] [INFO] TEST [lperez - openPage] STARTED at [16:53:41 2024-12-26]
+[2024-12-26 07:53:41] [1] [INFO] Starting driver session...
+[2024-12-26 07:53:43] [1] [INFO] Driver session started.
+[2024-12-26 07:53:43] [1] [INFO] INFO: opening url 'https://magento.softwaretestingboard.com'
+[2024-12-26 07:53:45] [1] [INFO] TEST [lperez - openPage] PASSED at [16:53:45 2024-12-26]
