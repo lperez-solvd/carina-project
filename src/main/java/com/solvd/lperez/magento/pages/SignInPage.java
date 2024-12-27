@@ -1,15 +1,9 @@
-package com.solvd.lperez.magento;
+package com.solvd.lperez.magento.pages;
 
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import com.zebrunner.carina.webdriver.gui.AbstractPage;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.time.Duration;
 
 public class SignInPage extends AbstractPage {
 
@@ -24,7 +18,6 @@ public class SignInPage extends AbstractPage {
 
     public SignInPage(WebDriver driver) {
         super(driver);
-
     }
 
 
@@ -37,10 +30,6 @@ public class SignInPage extends AbstractPage {
     }
 
     public SignInSuccessPage clickSubmitButton() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-
-        WebElement spanElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("button.login")));
-
         submitButton.click();
         return new SignInSuccessPage(driver);
     }

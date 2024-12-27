@@ -44,7 +44,7 @@ com.zebrunner.carina.webdriver.decorator.ExtendedWebElement.doAction(ExtendedWeb
 com.zebrunner.carina.webdriver.decorator.ExtendedWebElement.click(ExtendedWebElement.java:416)
 com.zebrunner.carina.webdriver.decorator.ExtendedWebElement.click(ExtendedWebElement.java:406)
 com.zebrunner.carina.webdriver.decorator.ExtendedWebElement.click(ExtendedWebElement.java:397)
-com.solvd.lperez.magento.HomePage.clickAddToCartButton(HomePage.java:61)
+com.solvd.lperez.magento.pages.HomePage.clickAddToCartButton(HomePage.java:61)
 com.solvd.lperez.magento.AddProductTest.addProductToCart(AddProductTest.java:18)
 java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
 java.base/java.lang.reflect.Method.invoke(Method.java:580)

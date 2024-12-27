@@ -1,10 +1,11 @@
 package com.solvd.lperez.magento;
 
+import com.solvd.lperez.magento.pages.HomePage;
+import com.solvd.lperez.magento.pages.SignInPage;
+import com.solvd.lperez.magento.pages.SignInSuccessPage;
 import com.solvd.lperez.magento.utils.emailProvider;
-import com.zebrunner.carina.core.AbstractTest;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
 
 
 public class SignInTest extends emailProvider {
@@ -20,7 +21,7 @@ public class SignInTest extends emailProvider {
 
         SignInSuccessPage signinSuccess = signin.clickSubmitButton();
 
-        Assert.assertTrue(signinSuccess.getWelcomeMessage().contains("Lucas Perez"));
+        Assert.assertTrue(signinSuccess.getWelcomeMessage().contains("Lucas Perez"), "The Welcome message don't contains the user name");
 
     }
 }

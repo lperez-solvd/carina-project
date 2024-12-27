@@ -1,4 +1,4 @@
-package com.solvd.lperez.magento;
+package com.solvd.lperez.magento.pages;
 
 
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;

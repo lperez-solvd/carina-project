@@ -1,5 +1,6 @@
-package com.solvd.lperez.magento;
+package com.solvd.lperez.magento.pages;
 
+import com.solvd.lperez.magento.components.CartComponent;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import com.zebrunner.carina.webdriver.gui.AbstractPage;
 import org.openqa.selenium.WebDriver;
@@ -21,8 +22,7 @@ public class HomePage extends AbstractPage {
     ExtendedWebElement firstHotSellersAddButton;
     @FindBy(xpath = "//span[@class='counter-number']")
     ExtendedWebElement cartElementsCounter;
-    @FindBy(xpath = "//ol[@id='mini-cart']//li[1]//a[@title='Remove item']")
-    ExtendedWebElement firstElementInCartDeleteButton;
+
     @FindBy(xpath = "//aside[@role='dialog']//footer//button[contains(span,'OK')]")
     ExtendedWebElement acceptDeletionButton;
     @FindBy(xpath = "//div[@id='ui-id-1']//strong[@class]")
@@ -33,6 +33,8 @@ public class HomePage extends AbstractPage {
     ExtendedWebElement searchButton;
     @FindBy(xpath = "//div[@data-block='minicart']//a//span[@class='text']/..")
     ExtendedWebElement openCartButton;
+    @FindBy(id = "ui-id-1")
+    CartComponent cart;
 
     public HomePage(WebDriver driver) {
         super(driver);
@@ -70,15 +72,6 @@ public class HomePage extends AbstractPage {
         openCartButton.click();
     }
 
-    public void deleteFirstElementInCart() {
-
-        firstElementInCartDeleteButton.click();
-    }
-
-    public void alternativeDeleteFirstElementInCart() {
-
-        firstElementInCartDeleteButton.click();
-    }
 
     public void acceptDeletion() {
         acceptDeletionButton.click();
@@ -92,6 +85,10 @@ public class HomePage extends AbstractPage {
 
         searchButton.click();
 
+    }
+
+    public CartComponent getCartComponent() {
+        return cart;
     }
 
     public SearchResults searchAProduct(String product) {
