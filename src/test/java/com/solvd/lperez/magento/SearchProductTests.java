@@ -1,7 +1,7 @@
 package com.solvd.lperez.magento;
 
-import com.solvd.lperez.magento.pages.HomePage;
-import com.solvd.lperez.magento.pages.SearchResults;
+import com.solvd.lperez.magento.desktop.pages.HomePage;
+import com.solvd.lperez.magento.desktop.pages.SearchResults;
 import com.zebrunner.carina.core.AbstractTest;
 import org.testng.Assert;
 import org.testng.annotations.Test;

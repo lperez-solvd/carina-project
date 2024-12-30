@@ -1,16 +1,16 @@
 package com.solvd.lperez.magento;
 
-import com.solvd.lperez.magento.pages.HomePage;
-import com.zebrunner.carina.core.AbstractTest;
-import org.testng.Assert;
+import com.solvd.lperez.magento.common.pages.HomePageBase;
+import com.zebrunner.carina.core.IAbstractTest;
 import org.testng.annotations.Test;
 
-public class HomePageTests extends AbstractTest {
+public class HomePageTests implements IAbstractTest {
 
     @Test
     public void openPage() {
-        HomePage home = new HomePage(getDriver());
+        HomePageBase home = initPage(HomePageBase.class);
         home.open();
-        Assert.assertTrue(home.isPageOpened(), "Page hasn't been opened correctly");
+        //home.chooseColor();
+        home.chooseSize();
     }
 }

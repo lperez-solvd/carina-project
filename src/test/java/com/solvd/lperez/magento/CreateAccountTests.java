@@ -1,8 +1,8 @@
 package com.solvd.lperez.magento;
 
-import com.solvd.lperez.magento.pages.CreateAccountPage;
-import com.solvd.lperez.magento.pages.CreateAccountSuccessPage;
-import com.solvd.lperez.magento.pages.HomePage;
+import com.solvd.lperez.magento.desktop.pages.CreateAccountPage;
+import com.solvd.lperez.magento.desktop.pages.CreateAccountSuccessPage;
+import com.solvd.lperez.magento.desktop.pages.HomePage;
 import com.solvd.lperez.magento.utils.emailProvider;
 import org.testng.Assert;
 import org.testng.annotations.Test;

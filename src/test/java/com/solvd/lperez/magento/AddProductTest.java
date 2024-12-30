@@ -1,6 +1,6 @@
 package com.solvd.lperez.magento;
 
-import com.solvd.lperez.magento.pages.HomePage;
+import com.solvd.lperez.magento.desktop.pages.HomePage;
 import com.zebrunner.carina.core.AbstractTest;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
