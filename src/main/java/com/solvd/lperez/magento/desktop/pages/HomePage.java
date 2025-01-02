@@ -99,5 +99,10 @@ public class HomePage extends HomePageBase {
         return new SearchResults(getDriver());
     }
 
+    @Override
+    public void typeOnSearchInput(String text) {
+
+    }
+
 
 }

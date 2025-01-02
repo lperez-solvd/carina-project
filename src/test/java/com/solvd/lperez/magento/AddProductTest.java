@@ -1,6 +1,7 @@
 package com.solvd.lperez.magento;
 
-import com.solvd.lperez.magento.desktop.pages.HomePage;
+import com.solvd.lperez.magento.common.components.CartComponentBase;
+import com.solvd.lperez.magento.common.pages.HomePageBase;
 import com.zebrunner.carina.core.AbstractTest;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
@@ -12,7 +13,7 @@ public class AddProductTest extends AbstractTest {
     @Test
     public void addProductToCart() {
 
-        HomePage home = new HomePage(getDriver());
+        HomePageBase home = initPage(HomePageBase.class);
         home.open();
         home.chooseSize();
         home.chooseColor();
@@ -20,7 +21,8 @@ public class AddProductTest extends AbstractTest {
         home.clickOnCart();
 
         SoftAssert sa = new SoftAssert();
-        sa.assertEquals(home.getCartComponent().getFirstProductName(), "Radiant Tee", "The product name is not the expected");
+        CartComponentBase cart = home.getCartComponent();
+        sa.assertEquals(cart.getFirstProductName(), "Radiant Tee", "The product name is not the expected");
         sa.assertEquals(home.getCartComponent().getFirstProductPrice(), "$22.00", "The product price is not the expected");
         sa.assertEquals(home.getNumberOfElementsInCart(), "1", "The number of elements is not the expected");
 

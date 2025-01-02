@@ -10,7 +10,8 @@ public class HomePageTests implements IAbstractTest {
     public void openPage() {
         HomePageBase home = initPage(HomePageBase.class);
         home.open();
-        //home.chooseColor();
         home.chooseSize();
+        home.chooseColor();
+
     }
 }

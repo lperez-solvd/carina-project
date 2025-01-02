@@ -8,11 +8,11 @@ import org.openqa.selenium.support.FindBy;
 
 public class CartComponent extends CartComponentBase {
 
-    @FindBy(xpath = "//strong[@class='product-item-name']//a")
+    @FindBy(xpath = "(//android.view.View/android.view.View[2]")
     ExtendedWebElement firstProductName;
-    @FindBy(className = "price")
+    @FindBy(xpath = "//android.view.View/android.widget.TextView")
     ExtendedWebElement firstProductPrice;
-    @FindBy(xpath = "//a[@title='Remove item']")
+    @FindBy(xpath = "//android.view.View/android.view.View[4]/android.view.View[2]/android.widget.TextView[1]")
     ExtendedWebElement deleteItemButton;
 
     public CartComponent(WebDriver driver, SearchContext searchContext) {
@@ -20,6 +20,7 @@ public class CartComponent extends CartComponentBase {
     }
 
     public String getFirstProductName() {
+
         return firstProductName.getText();
     }
 

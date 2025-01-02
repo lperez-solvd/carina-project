@@ -19,13 +19,13 @@ public class HomePage extends HomePageBase implements IMobileUtils {
 
     @FindBy(xpath = "//a[contains(text(),'Sign In')]")
     ExtendedWebElement signInButton;
-    @FindBy(xpath = "//android.widget.ListView[@text=\"Size\"]/android.view.View[@text=\"S\"][1]")
+    @FindBy(xpath = "//android.widget.ListView[@text='Size']/android.view.View[@text=\"S\"][1]")
     ExtendedWebElement firstHotSellersSize;
-    @FindBy(xpath = "//android.widget.ListView[@text=\"Size\"]/android.view.View[@text=\"S\"][1]")
+    @FindBy(xpath = "//android.widget.ListView[@text='Color']/android.view.View[@text=\"Orange\"]")
     ExtendedWebElement firstHotSellersColor;
-    @FindBy(xpath = "//div[@class='block-content']//ol//li[1]//button[@type='submit']")
+    @FindBy(xpath = "//android.widget.Button[@text='Add to Cart'][1]")
     ExtendedWebElement firstHotSellersAddButton;
-    @FindBy(xpath = "//span[@class='counter-number']")
+    @FindBy(xpath = "(//android.widget.Button[@text=\"Add to Cart\"])[1]")
     ExtendedWebElement cartElementsCounter;
 
     @FindBy(xpath = "//aside[@role='dialog']//footer//button[contains(span,'OK')]")
@@ -36,9 +36,9 @@ public class HomePage extends HomePageBase implements IMobileUtils {
     ExtendedWebElement searchInput;
     @FindBy(xpath = "//form[@id='search_mini_form']//button")
     ExtendedWebElement searchButton;
-    @FindBy(xpath = "//div[@data-block='minicart']//a//span[@class='text']/..")
+    @FindBy(xpath = "//android.widget.TextView[@text='Search']")
     ExtendedWebElement openCartButton;
-    @FindBy(id = "ui-id-1")
+    @FindBy(xpath = "//android.widget.ListView")
     CartComponent cart;
 
     public HomePage(WebDriver driver) {
@@ -56,6 +56,7 @@ public class HomePage extends HomePageBase implements IMobileUtils {
     }
 
     public void chooseSize() {
+        swipe(firstHotSellersSize);
         firstHotSellersSize.click();
     }
 
@@ -72,10 +73,9 @@ public class HomePage extends HomePageBase implements IMobileUtils {
     }
 
     public void clickOnCart() {
-
+        pause(5);
         openCartButton.click();
     }
-
 
     public void acceptDeletion() {
         acceptDeletionButton.click();
@@ -92,6 +92,7 @@ public class HomePage extends HomePageBase implements IMobileUtils {
     }
 
     public CartComponent getCartComponent() {
+        pause(2);
         return cart;
     }
 
@@ -99,6 +100,10 @@ public class HomePage extends HomePageBase implements IMobileUtils {
         searchInput.type(product);
         clickSearchButton();
         return new SearchResults(getDriver());
+    }
+
+    public void typeOnSearchInput(String text) {
+        searchInput.type(text);
     }
 
 

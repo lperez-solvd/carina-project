@@ -39,5 +39,6 @@ public abstract class HomePageBase extends AbstractPage implements IMobileUtils 
     public abstract CartComponentBase getCartComponent();
 
     public abstract SearchResults searchAProduct(String product);
+    public abstract void typeOnSearchInput(String text);
 
 }
