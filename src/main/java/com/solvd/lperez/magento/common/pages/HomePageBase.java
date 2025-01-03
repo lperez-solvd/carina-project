@@ -16,7 +16,7 @@ public abstract class HomePageBase extends AbstractPage implements IMobileUtils 
         super(driver);
     }
 
-    public abstract CreateAccountPage clickCreateAccountButton();
+    public abstract CreateAccountPageBase clickCreateAccountButton();
 
     public abstract SignInPage clickSingInButton();
 

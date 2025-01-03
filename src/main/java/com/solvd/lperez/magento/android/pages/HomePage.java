@@ -1,6 +1,7 @@
 package com.solvd.lperez.magento.android.pages;
 
 import com.solvd.lperez.magento.android.components.CartComponent;
+import com.solvd.lperez.magento.common.pages.CreateAccountPageBase;
 import com.solvd.lperez.magento.common.pages.HomePageBase;
 import com.solvd.lperez.magento.desktop.pages.CreateAccountPage;
 import com.solvd.lperez.magento.desktop.pages.SearchResults;
@@ -8,13 +9,16 @@ import com.solvd.lperez.magento.desktop.pages.SignInPage;
 import com.zebrunner.carina.utils.factory.DeviceType;
 import com.zebrunner.carina.utils.mobile.IMobileUtils;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
+import io.appium.java_client.AppiumBy;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 @DeviceType(pageType = DeviceType.Type.ANDROID_PHONE, parentClass = HomePageBase.class)
 public class HomePage extends HomePageBase implements IMobileUtils {
 
-    @FindBy(xpath = "//a[contains(text(),'Create an Account')]")
+    @FindBy(xpath = "//android.view.View[@content-desc='Create an Account']")
     ExtendedWebElement createAccountButton;
 
     @FindBy(xpath = "//a[contains(text(),'Sign In')]")
@@ -28,7 +32,7 @@ public class HomePage extends HomePageBase implements IMobileUtils {
     @FindBy(xpath = "(//android.widget.Button[@text=\"Add to Cart\"])[1]")
     ExtendedWebElement cartElementsCounter;
 
-    @FindBy(xpath = "//aside[@role='dialog']//footer//button[contains(span,'OK')]")
+    @FindBy(xpath = "//android.app.Dialog//android.widget.Button[@text='OK']")
     ExtendedWebElement acceptDeletionButton;
     @FindBy(xpath = "//div[@id='ui-id-1']//strong[@class]")
     ExtendedWebElement cartMessage;
@@ -40,14 +44,22 @@ public class HomePage extends HomePageBase implements IMobileUtils {
     ExtendedWebElement openCartButton;
     @FindBy(xpath = "//android.widget.ListView")
     CartComponent cart;
+    @FindBy(xpath = "//android.webkit.WebView[@text='Home Page']/android.view.View/android.view.View[1]/android.view.View[2]/android.view.View[1]")
+    ExtendedWebElement hamburguerNav;
+    @FindBy(xpath = "//android.widget.TextView[@text='Account']")
+    ExtendedWebElement accountSection;
 
     public HomePage(WebDriver driver) {
         super(driver);
     }
 
-    public CreateAccountPage clickCreateAccountButton() {
+    public CreateAccountPageBase clickCreateAccountButton() {
+        hamburguerNav.click();
+        waitUntil(driver -> accountSection.isElementPresent(), 10);
+        accountSection.click();
+        pause(1);
         createAccountButton.click();
-        return new CreateAccountPage(getDriver());
+        return initPage(CreateAccountPageBase.class);
     }
 
     public SignInPage clickSingInButton() {
@@ -73,7 +85,7 @@ public class HomePage extends HomePageBase implements IMobileUtils {
     }
 
     public void clickOnCart() {
-        pause(5);
+        pause(5); // maybe would be better an explicit wait until the text is "1"
         openCartButton.click();
     }
 
@@ -92,7 +104,7 @@ public class HomePage extends HomePageBase implements IMobileUtils {
     }
 
     public CartComponent getCartComponent() {
-        pause(2);
+
         return cart;
     }
 

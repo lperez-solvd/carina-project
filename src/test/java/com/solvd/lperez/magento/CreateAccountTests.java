@@ -1,5 +1,8 @@
 package com.solvd.lperez.magento;
 
+import com.solvd.lperez.magento.common.pages.CreateAccountPageBase;
+import com.solvd.lperez.magento.common.pages.CreateAccountSuccessPageBase;
+import com.solvd.lperez.magento.common.pages.HomePageBase;
 import com.solvd.lperez.magento.desktop.pages.CreateAccountPage;
 import com.solvd.lperez.magento.desktop.pages.CreateAccountSuccessPage;
 import com.solvd.lperez.magento.desktop.pages.HomePage;
@@ -15,16 +18,16 @@ public class CreateAccountTests extends emailProvider {
     @Test
     public void createAccount() {
 
-        HomePage home = new HomePage(getDriver());
+        HomePageBase home = initPage(HomePageBase.class);
         home.open();
-        CreateAccountPage createPage = home.clickCreateAccountButton();
+        CreateAccountPageBase createPage = home.clickCreateAccountButton();
 
         createPage.enterName("Lucas");
         createPage.enterLastName("Perez");
         createPage.enterEmail(getUserEmail());
         createPage.enterPass("1LuPoIo4");
 
-        CreateAccountSuccessPage createSuccess = createPage.clickSubmitButton();
+        CreateAccountSuccessPageBase createSuccess = createPage.clickSubmitButton();
 
         Assert.assertEquals(createSuccess.getAlertMessage(), "Thank you for registering with Main Website Store.", "The successful message is not the expected one");
 

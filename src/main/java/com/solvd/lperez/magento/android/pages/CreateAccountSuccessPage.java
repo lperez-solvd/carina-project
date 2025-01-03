@@ -10,7 +10,7 @@ import org.openqa.selenium.support.FindBy;
 @DeviceType(pageType = DeviceType.Type.ANDROID_PHONE, parentClass = CreateAccountSuccessPageBase.class)
 public class CreateAccountSuccessPage extends CreateAccountSuccessPageBase {
 
-    @FindBy(xpath = "//div[@role='alert']//div[normalize-space(text())]")
+    @FindBy(xpath = "//android.widget.TextView[@text='Thank you for registering with Main Website Store.']")
     ExtendedWebElement alertMessage;
 
     public CreateAccountSuccessPage(WebDriver driver) {

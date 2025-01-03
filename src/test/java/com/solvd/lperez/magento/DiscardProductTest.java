@@ -1,5 +1,6 @@
 package com.solvd.lperez.magento;
 
+import com.solvd.lperez.magento.common.pages.HomePageBase;
 import com.solvd.lperez.magento.desktop.pages.HomePage;
 import com.zebrunner.carina.core.AbstractTest;
 import org.testng.Assert;
@@ -11,7 +12,7 @@ public class DiscardProductTest extends AbstractTest {
     @Test
     public void addAndDiscardProduct() {
 
-        HomePage home = new HomePage(getDriver());
+        HomePageBase home = initPage(HomePageBase.class);
         home.open();
         home.chooseSize();
         home.chooseColor();

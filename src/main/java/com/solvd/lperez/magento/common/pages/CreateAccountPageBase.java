@@ -17,6 +17,6 @@ public abstract class CreateAccountPageBase extends AbstractPage {
 
     public abstract void enterPass(String password);
 
-    public abstract CreateAccountSuccessPage clickSubmitButton();
+    public abstract CreateAccountSuccessPageBase clickSubmitButton();
 
 }

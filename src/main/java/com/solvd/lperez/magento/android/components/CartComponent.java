@@ -8,7 +8,7 @@ import org.openqa.selenium.support.FindBy;
 
 public class CartComponent extends CartComponentBase {
 
-    @FindBy(xpath = "(//android.view.View/android.view.View[2]")
+    @FindBy(xpath = "(//android.view.View/android.view.View[2]/android.widget.TextView")
     ExtendedWebElement firstProductName;
     @FindBy(xpath = "//android.view.View/android.widget.TextView")
     ExtendedWebElement firstProductPrice;

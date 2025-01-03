@@ -1,31 +1,33 @@
 package com.solvd.lperez.magento.android.pages;
 
 import com.solvd.lperez.magento.common.pages.CreateAccountPageBase;
+import com.solvd.lperez.magento.common.pages.CreateAccountSuccessPageBase;
 import com.solvd.lperez.magento.desktop.pages.CreateAccountSuccessPage;
 import com.zebrunner.carina.utils.factory.DeviceType;
+import com.zebrunner.carina.utils.mobile.IMobileUtils;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
 @DeviceType(pageType = DeviceType.Type.ANDROID_PHONE, parentClass = CreateAccountPageBase.class)
-public class CreateAccountPage extends CreateAccountPageBase {
+public class CreateAccountPage extends CreateAccountPageBase implements IMobileUtils {
 
-    @FindBy(xpath = "//input[@name='firstname']")
+    @FindBy(xpath = "(//android.view.View[@text='Personal Information'])[1]/android.view.View[3]/android.widget.EditText")
     ExtendedWebElement nameInput;
 
-    @FindBy(xpath = "//input[@name='lastname']")
+    @FindBy(xpath = "/(//android.view.View[@text='Personal Information'])[1]/android.view.View[5]/android.widget.EditText")
     ExtendedWebElement lastNameInput;
 
-    @FindBy(xpath = "//input[@name='email']")
+    @FindBy(xpath = "(//android.view.View[@text='Sign-in Information'])[1]/android.view.View[3]/android.widget.EditText")
     ExtendedWebElement emailInput;
 
-    @FindBy(xpath = "//input[@name='password']")
+    @FindBy(xpath = "(//android.view.View[@text='Sign-in Information'])[1]/android.widget.EditText")
     ExtendedWebElement passwordInput;
 
-    @FindBy(xpath = "//input[@name='password_confirmation']")
+    @FindBy(xpath = "(//android.view.View[@text='Sign-in Information'])[1]/android.view.View[7]/android.widget.EditText")
     ExtendedWebElement passwordConfirmation;
 
-    @FindBy(xpath = "//button[@title='Create an Account']")
+    @FindBy(xpath = "//android.widget.Button[@text='Create an Account']")
     ExtendedWebElement submitButton;
 
     public CreateAccountPage(WebDriver driver) {
@@ -55,9 +57,10 @@ public class CreateAccountPage extends CreateAccountPageBase {
     }
 
     @Override
-    public CreateAccountSuccessPage clickSubmitButton() {
+    public CreateAccountSuccessPageBase clickSubmitButton() {
+        swipe(submitButton);
         submitButton.click();
-        return new CreateAccountSuccessPage(getDriver());
+        return initPage(CreateAccountSuccessPageBase.class);
     }
 
 
