@@ -3,16 +3,12 @@ package com.solvd.lperez.magento.android.pages;
 import com.solvd.lperez.magento.android.components.CartComponent;
 import com.solvd.lperez.magento.common.pages.CreateAccountPageBase;
 import com.solvd.lperez.magento.common.pages.HomePageBase;
-import com.solvd.lperez.magento.desktop.pages.CreateAccountPage;
-import com.solvd.lperez.magento.desktop.pages.SearchResults;
-import com.solvd.lperez.magento.desktop.pages.SignInPage;
+import com.solvd.lperez.magento.common.pages.SearchResultsBase;
+import com.solvd.lperez.magento.common.pages.SignInPageBase;
 import com.zebrunner.carina.utils.factory.DeviceType;
 import com.zebrunner.carina.utils.mobile.IMobileUtils;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
-import io.appium.java_client.AppiumBy;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 @DeviceType(pageType = DeviceType.Type.ANDROID_PHONE, parentClass = HomePageBase.class)
@@ -21,7 +17,7 @@ public class HomePage extends HomePageBase implements IMobileUtils {
     @FindBy(xpath = "//android.view.View[@content-desc='Create an Account']")
     ExtendedWebElement createAccountButton;
 
-    @FindBy(xpath = "//a[contains(text(),'Sign In')]")
+    @FindBy(xpath = "//android.view.View[@content-desc=\"Sign In\"]")
     ExtendedWebElement signInButton;
     @FindBy(xpath = "//android.widget.ListView[@text='Size']/android.view.View[@text=\"S\"][1]")
     ExtendedWebElement firstHotSellersSize;
@@ -36,7 +32,7 @@ public class HomePage extends HomePageBase implements IMobileUtils {
     ExtendedWebElement acceptDeletionButton;
     @FindBy(xpath = "//div[@id='ui-id-1']//strong[@class]")
     ExtendedWebElement cartMessage;
-    @FindBy(id = "search")
+    @FindBy(xpath = "//android.webkit.WebView[@text=\"Home Page\"]/android.view.View/android.view.View[1]/android.view.View[2]/android.view.View[4]/android.view.View[2]/android.widget.EditText")
     ExtendedWebElement searchInput;
     @FindBy(xpath = "//form[@id='search_mini_form']//button")
     ExtendedWebElement searchButton;
@@ -48,6 +44,10 @@ public class HomePage extends HomePageBase implements IMobileUtils {
     ExtendedWebElement hamburguerNav;
     @FindBy(xpath = "//android.widget.TextView[@text='Account']")
     ExtendedWebElement accountSection;
+    @FindBy(xpath = "//android.widget.TextView[@text=\"\uE615\"]")
+    ExtendedWebElement openSearchButton;
+    @FindBy(xpath = "//android.view.View[@text=\"Abominable Hoodie\"]")
+    ExtendedWebElement listFirstOption;
 
     public HomePage(WebDriver driver) {
         super(driver);
@@ -62,9 +62,13 @@ public class HomePage extends HomePageBase implements IMobileUtils {
         return initPage(CreateAccountPageBase.class);
     }
 
-    public SignInPage clickSingInButton() {
+    public SignInPageBase clickSingInButton() {
+        hamburguerNav.click();
+        waitUntil(driver -> accountSection.isElementPresent(), 10);
+        accountSection.click();
+        pause(1);
         signInButton.click();
-        return new SignInPage(getDriver());
+        return initPage(SignInPageBase.class);
     }
 
     public void chooseSize() {
@@ -108,10 +112,12 @@ public class HomePage extends HomePageBase implements IMobileUtils {
         return cart;
     }
 
-    public SearchResults searchAProduct(String product) {
-        searchInput.type(product);
-        clickSearchButton();
-        return new SearchResults(getDriver());
+    public SearchResultsBase searchAProduct(String product) {
+        openSearchButton.click();
+        searchInput.type(product + "\n");
+        waitUntil(d -> listFirstOption.isElementPresent(), 10);
+        listFirstOption.click();
+        return initPage(SearchResultsBase.class);
     }
 
     public void typeOnSearchInput(String text) {
