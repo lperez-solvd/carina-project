@@ -48,6 +48,10 @@ public class HomePage extends HomePageBase implements IMobileUtils {
     ExtendedWebElement openSearchButton;
     @FindBy(xpath = "//android.view.View[@text=\"Abominable Hoodie\"]")
     ExtendedWebElement listFirstOption;
+    @FindBy(xpath = "//android.widget.TextView[@text=\"Shop New Yoga\"]")
+    ExtendedWebElement shopYogButton;
+    @FindBy(xpath = "//android.widget.TextView[@resource-id=\"com.android.chrome:id/menu_row_text\" and @text=\"Copy link address\"]")
+    ExtendedWebElement copyLinkAddress;
 
     public HomePage(WebDriver driver) {
         super(driver);
@@ -124,5 +128,11 @@ public class HomePage extends HomePageBase implements IMobileUtils {
         searchInput.type(text);
     }
 
+    public String copyYogaUrl() {
+        longTap(shopYogButton);
+        waitUntil(d -> copyLinkAddress.isElementPresent(), 10);
+        copyLinkAddress.click();
+        return getTextFromClipboard();
+    }
 
 }

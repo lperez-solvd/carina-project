@@ -4,7 +4,6 @@ import com.solvd.lperez.magento.common.pages.HomePageBase;
 import com.solvd.lperez.magento.desktop.pages.components.CartComponent;
 import com.zebrunner.carina.utils.factory.DeviceType;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
-import com.zebrunner.carina.webdriver.gui.AbstractPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
@@ -102,6 +101,11 @@ public class HomePage extends HomePageBase {
     @Override
     public void typeOnSearchInput(String text) {
 
+    }
+
+    @Override
+    public String copyYogaUrl() {
+        return "";
     }
 
 

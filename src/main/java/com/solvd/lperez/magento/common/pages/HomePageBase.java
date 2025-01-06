@@ -36,5 +36,6 @@ public abstract class HomePageBase extends AbstractPage implements IMobileUtils 
 
     public abstract SearchResultsBase searchAProduct(String product);
     public abstract void typeOnSearchInput(String text);
+    public abstract String copyYogaUrl ();
 
 }
