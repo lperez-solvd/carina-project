@@ -1,10 +1,11 @@
 package com.solvd.lperez.magento.ios.pages;
 
-import com.solvd.lperez.magento.android.components.CartComponent;
+import com.solvd.lperez.magento.common.components.CartComponentBase;
 import com.solvd.lperez.magento.common.pages.CreateAccountPageBase;
 import com.solvd.lperez.magento.common.pages.HomePageBase;
 import com.solvd.lperez.magento.common.pages.SearchResultsBase;
 import com.solvd.lperez.magento.common.pages.SignInPageBase;
+import com.solvd.lperez.magento.ios.components.CartComponent;
 import com.zebrunner.carina.utils.factory.DeviceType;
 import com.zebrunner.carina.utils.mobile.IMobileUtils;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
@@ -15,10 +16,10 @@ import org.openqa.selenium.support.FindBy;
 @DeviceType(pageType = DeviceType.Type.IOS_PHONE, parentClass = HomePageBase.class)
 public class HomePage extends HomePageBase implements IMobileUtils {
 
-    @FindBy(xpath = "//android.view.View[@content-desc='Create an Account']")
+    @ExtendedFindBy(iosPredicate = "name = 'Create an Account'")
     ExtendedWebElement createAccountButton;
 
-    @FindBy(xpath = "//android.view.View[@content-desc=\"Sign In\"]")
+    @ExtendedFindBy(iosPredicate = "name = 'Sign In'")
     ExtendedWebElement signInButton;
     @ExtendedFindBy(iosClassChain = "**/XCUIElementTypeOther[`name == \"S\"`][1]")
     ExtendedWebElement firstHotSellersSize;
@@ -26,28 +27,28 @@ public class HomePage extends HomePageBase implements IMobileUtils {
     ExtendedWebElement firstHotSellersColor;
     @FindBy(xpath = "(//XCUIElementTypeButton[@name=\"Add to Cart\"])[1]")
     ExtendedWebElement firstHotSellersAddButton;
-    @FindBy(xpath = "(//android.widget.Button[@text=\"Add to Cart\"])[1]")
+    @ExtendedFindBy(iosClassChain = "**/XCUIElementTypeOther[`name == \"web dialog\"`]/XCUIElementTypeOther[1]/XCUIElementTypeStaticText[1]")
     ExtendedWebElement cartElementsCounter;
 
-    @FindBy(xpath = "//android.app.Dialog//android.widget.Button[@text='OK']")
+    @ExtendedFindBy(iosPredicate = "type == 'XCUIElementTypeButton' AND name == 'OK'")
     ExtendedWebElement acceptDeletionButton;
-    @FindBy(xpath = "//div[@id='ui-id-1']//strong[@class]")
+    @ExtendedFindBy(iosClassChain = "**/XCUIElementTypeStaticText")
     ExtendedWebElement cartMessage;
-    @FindBy(xpath = "//android.webkit.WebView[@text=\"Home Page\"]/android.view.View/android.view.View[1]/android.view.View[2]/android.view.View[4]/android.view.View[2]/android.widget.EditText")
+    @ExtendedFindBy(iosPredicate = "type == 'XCUIElementTypeTextField' AND name CONTAINS 'Search'")
     ExtendedWebElement searchInput;
     @FindBy(xpath = "//form[@id='search_mini_form']//button")
     ExtendedWebElement searchButton;
-    @FindBy(xpath = "//android.widget.TextView[@text='Search']")
+    @ExtendedFindBy(iosPredicate = "type == 'XCUIElementTypeLink' AND name CONTAINS 'My Cart'")
     ExtendedWebElement openCartButton;
-    @FindBy(xpath = "//android.widget.ListView")
+    @ExtendedFindBy(iosPredicate = "name == 'web dialog'")
     CartComponent cart;
-    @FindBy(xpath = "//android.webkit.WebView[@text='Home Page']/android.view.View/android.view.View[1]/android.view.View[2]/android.view.View[1]")
+    @ExtendedFindBy(iosPredicate = "name == \"\uE609\"")
     ExtendedWebElement hamburguerNav;
-    @FindBy(xpath = "//android.widget.TextView[@text='Account']")
+    @ExtendedFindBy(iosPredicate = "name = 'Account'")
     ExtendedWebElement accountSection;
-    @FindBy(xpath = "//android.widget.TextView[@text=\"\uE615\"]")
+    @ExtendedFindBy(iosPredicate = "type == 'XCUIElementTypeOther' AND name CONTAINS 'Search'")
     ExtendedWebElement openSearchButton;
-    @FindBy(xpath = "//android.view.View[@text=\"Abominable Hoodie\"]")
+    @ExtendedFindBy(iosPredicate = "type == 'XCUIElementTypeOther' AND name == 'Abominable Hoodie'")
     ExtendedWebElement listFirstOption;
     @FindBy(xpath = "//android.widget.TextView[@text=\"Shop New Yoga\"]")
     ExtendedWebElement shopYogButton;
@@ -92,7 +93,7 @@ public class HomePage extends HomePageBase implements IMobileUtils {
     }
 
     public String getNumberOfElementsInCart() {
-        return cartElementsCounter.getText();
+        return cartElementsCounter.getAttribute("value");
     }
 
     public void clickOnCart() {
@@ -105,7 +106,7 @@ public class HomePage extends HomePageBase implements IMobileUtils {
     }
 
     public String getCartMessage() {
-        return cartMessage.getText();
+        return cart.getCartMessage();
     }
 
     public void clickSearchButton() {
@@ -115,15 +116,12 @@ public class HomePage extends HomePageBase implements IMobileUtils {
     }
 
     public CartComponent getCartComponent() {
-
         return cart;
     }
 
     public SearchResultsBase searchAProduct(String product) {
         openSearchButton.click();
         searchInput.type(product + "\n");
-        waitUntil(d -> listFirstOption.isElementPresent(), 10);
-        listFirstOption.click();
         return initPage(SearchResultsBase.class);
     }
 

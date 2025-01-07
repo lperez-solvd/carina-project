@@ -3,13 +3,9 @@ package com.solvd.lperez.magento;
 import com.solvd.lperez.magento.common.pages.CreateAccountPageBase;
 import com.solvd.lperez.magento.common.pages.CreateAccountSuccessPageBase;
 import com.solvd.lperez.magento.common.pages.HomePageBase;
-import com.solvd.lperez.magento.desktop.pages.CreateAccountPage;
-import com.solvd.lperez.magento.desktop.pages.CreateAccountSuccessPage;
-import com.solvd.lperez.magento.desktop.pages.HomePage;
 import com.solvd.lperez.magento.utils.emailProvider;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
 
 
 public class CreateAccountTests extends emailProvider {
@@ -35,15 +31,15 @@ public class CreateAccountTests extends emailProvider {
 
     @Test(dependsOnMethods = {"createAccount"})
     public void createAccountWithExistingEmail() {
-        HomePage home = new HomePage(getDriver());
-        CreateAccountPage createPage = home.clickCreateAccountButton();
+        HomePageBase home = initPage(HomePageBase.class);
+        CreateAccountPageBase createPage = home.clickCreateAccountButton();
 
         createPage.enterName("Lucas");
         createPage.enterLastName("Perez");
         createPage.enterEmail(getUserEmail());
         createPage.enterPass("1LuPoIo4");
 
-        CreateAccountSuccessPage createSuccess = createPage.clickSubmitButton();
+        CreateAccountSuccessPageBase createSuccess = createPage.clickSubmitButton();
 
         Assert.assertEquals(createSuccess.getAlertMessage(), "There is already an account with this email address. If you are sure that it is your email address, click here to get your password and access your account.", "The fail message is not the expected one");
     }
